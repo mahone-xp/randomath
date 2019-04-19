@@ -21,12 +21,11 @@ int main()
     int plusqty, minusqty, _qty, range, taskQTY;
     fpMath = fopen("math.txt", "w");
     plusqty = minusqty = 0;
-    _qty = 1;
     range = 80;
     taskQTY = 100;
     srand((unsigned)time(NULL));
     _CREATE(range);
-    for (_qty; _qty <= taskQTY; _qty++)
+    for (_qty = 1; _qty <= taskQTY; _qty++)
     {
 
         if (symb == 0)
@@ -60,5 +59,4 @@ int main()
     printf("+=%d -=%d\n", plusqty, minusqty);
     fclose(fpMath);
     getchar();
-    
 }
