@@ -3,9 +3,10 @@
 #include <time.h>
 
 int _CREATE(int _RANGE);
-//int MAX(int x, int y);
+int _LINEIT(int qty);
 
 int num1, num2, symb;
+//全局变量，方便生成随机数被main取用
 int _CREATE(int _RANGE)
 {
     symb = rand() % 2;
@@ -18,22 +19,24 @@ int _CREATE(int _RANGE)
 int main()
 {
     FILE *fpMath;
-    int plusqty, minusqty, _qty, range, taskQTY;
+    int plusqty, minusqty, mathqty, range, taskQTY;
     fpMath = fopen("math.txt", "w");
+    //应该加一个检测的，好懒，不想加啊
     plusqty = minusqty = 0;
     range = 80;
     taskQTY = 100;
     srand((unsigned)time(NULL));
     _CREATE(range);
-    for (_qty = 1; _qty <= taskQTY; _qty++)
+    for (mathqty = 1; mathqty <= taskQTY; mathqty++)
     {
 
         if (symb == 0)
         {
             if (num1 > num2)
-                fprintf(fpMath, "%d - %d =\n", num1, num2);
+                fprintf(fpMath, "%d - %d =", num1, num2);
             else
-                fprintf(fpMath, "%d - %d =\n", num2, num1);
+                fprintf(fpMath, "%d - %d =", num2, num1);
+            fprintf(fpMath, "%c", _LINEIT(mathqty));
             minusqty++;
             _CREATE(range);
         }
@@ -41,7 +44,8 @@ int main()
         {
             if (num1 + num2 <= 100)
             {
-                fprintf(fpMath, "%d + %d =\n", num1, num2);
+                fprintf(fpMath, "%d + %d =", num1, num2);
+                fprintf(fpMath, "%c", _LINEIT(mathqty));
                 plusqty++;
                 _CREATE(range);
             }
@@ -49,7 +53,7 @@ int main()
             {
                 _CREATE(range);
                 symb = 1;
-                _qty--;
+                mathqty--;
                 //在两随机数相加的结果大于范围range的时候
                 //再生成一组随机数，使symb=1强制设置为加法
                 //并减少一次循环量
@@ -59,4 +63,12 @@ int main()
     printf("+=%d -=%d\n", plusqty, minusqty);
     fclose(fpMath);
     getchar();
+}
+
+int _LINEIT(int _QTY)
+{
+    if (_QTY % 4 == 0)
+        return 10;
+    else
+        return 9;
 }
