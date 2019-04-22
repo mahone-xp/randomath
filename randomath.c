@@ -19,39 +19,39 @@ int _CREATE(int _RANGE)
 int main()
 {
     FILE *fpMath;
-    int plusqty, minusqty, mathqty, range, taskQTY;
+    int plusqty, minusqty, mathqty, taskrange, taskQTY;
     fpMath = fopen("math.txt", "w");
     //应该加一个检测的，好懒，不想加啊
     plusqty = minusqty = 0;
-    range = 80;
+    taskrange = 80;
     taskQTY = 100;
     srand((unsigned)time(NULL));
-    _CREATE(range);
+    _CREATE(taskrange);
     for (mathqty = 1; mathqty <= taskQTY; mathqty++)
     {
 
         if (symb == 0)
         {
             if (num1 > num2)
-                fprintf(fpMath, "%d - %d =", num1, num2);
+                fprintf(fpMath, "%2d - %2d =", num1, num2);
             else
-                fprintf(fpMath, "%d - %d =", num2, num1);
+                fprintf(fpMath, "%2d - %2d =", num2, num1);
             fprintf(fpMath, "%c", _LINEIT(mathqty));
             minusqty++;
-            _CREATE(range);
+            _CREATE(taskrange);
         }
         else
         {
-            if (num1 + num2 <= 100)
+            if (num1 + num2 <= taskrange)
             {
-                fprintf(fpMath, "%d + %d =", num1, num2);
+                fprintf(fpMath, "%2d + %2d =", num1, num2);
                 fprintf(fpMath, "%c", _LINEIT(mathqty));
                 plusqty++;
-                _CREATE(range);
+                _CREATE(taskrange);
             }
             else
             {
-                _CREATE(range);
+                _CREATE(taskrange);
                 symb = 1;
                 mathqty--;
                 //在两随机数相加的结果大于范围range的时候
